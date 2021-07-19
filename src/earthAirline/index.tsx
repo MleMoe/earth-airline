@@ -18,17 +18,7 @@ interface segmentItem {
 
 const radius = 150;
 
-// const cities = [{
-//   name: '',
-//   pos: ;
-
-// }]
-
 const segments: segmentItem[] = [
-  {
-    depCity: '北京',
-    arrCity: '上海',
-  },
   {
     depCity: '北京',
     arrCity: '杭州',
@@ -70,7 +60,7 @@ function EarthAirline() {
       ...new Set(segments.map((seg) => Object.values(seg)).flat()),
     ];
     const cityPromises = cityList.map((name) => {
-      return cityToXyz(name, radius);
+      return cityToXyz(name, radius - 1);
     });
     Promise.all(cityPromises).then((res) => {
       setCitiesData(res);

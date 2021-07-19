@@ -44,18 +44,18 @@ function Earth({ radius = 100 }) {
         <meshPhongMaterial
           emissiveIntensity={0.1}
           map={colorMap}
-          // alphaMap={alphaMap}
+          alphaMap={alphaMap}
           bumpMap={bumpMap}
         ></meshPhongMaterial>
       </animated.mesh>
 
       <animated.mesh visible onClick={() => setActive(!active)}>
-        <sphereGeometry args={[radius + 1, 32, 32]} />
+        <sphereGeometry args={[radius + 2, 32, 32]} />
         <meshPhongMaterial transparent map={cloudMap}></meshPhongMaterial>
       </animated.mesh>
 
       <animated.mesh visible>
-        <sphereGeometry args={[500, 32, 32]} />
+        <sphereGeometry args={[600, 32, 32]} />
         <meshStandardMaterial
           transparent
           map={galaxyMap}
