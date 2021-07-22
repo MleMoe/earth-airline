@@ -10,7 +10,7 @@ export default function Container(props: any) {
       <directionalLight position={[-100, 500, 200]} color='#aaa' />
       <pointLight position={[180, 180, 180]} color='#999' />
       <OrbitControls
-        autoRotate={false}
+        autoRotate={true}
         // minDistance={-1}
         // enablePan={false}
         // enableZoom={false}
