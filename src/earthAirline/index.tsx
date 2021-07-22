@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { Vector3 } from 'three';
 import AirLine from '../component/airline';
 import Airport from '../component/airport';
-import CityName from '../component/cityname';
 import Earth from '../component/earth';
 import { CityItem } from '../utils';
 import { cityToXyz } from '../utils/cityToXyz';
@@ -16,7 +15,7 @@ interface segmentItem {
   arrPos?: Vector3;
 }
 
-const radius = 150;
+const radius = 120;
 
 const segments: segmentItem[] = [
   {
@@ -60,7 +59,7 @@ function EarthAirline() {
       ...new Set(segments.map((seg) => Object.values(seg)).flat()),
     ];
     const cityPromises = cityList.map((name) => {
-      return cityToXyz(name, radius - 1);
+      return cityToXyz(name, radius);
     });
     Promise.all(cityPromises).then((res) => {
       setCitiesData(res);
@@ -69,7 +68,7 @@ function EarthAirline() {
   // console.log(store);
 
   return citiesData ? (
-    <>
+    <group rotation={[0, Math.PI, 0]}>
       <Earth radius={radius} />
       {segments.map((item, index) => {
         Object.assign(item, {
@@ -83,13 +82,10 @@ function EarthAirline() {
       })}
       {citiesData.map((city, index) => {
         return (
-          <Fragment key={index}>
-            <Airport pos={city.position} />
-            <CityName name={city.name} position={city.position} />
-          </Fragment>
+          <Airport key={index} name={city.name} position={city.position} />
         );
       })}
-    </>
+    </group>
   ) : null;
 }
 
